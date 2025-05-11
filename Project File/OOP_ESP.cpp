@@ -33,12 +33,12 @@ public:
     }
 
     virtual void display() {
-        cout << left << setw(20) << title
+        cout << left << setw(25) << title
              << setw(15) << date
              << setw(15) << time
-             << setw(100) << description
+             << setw(70) << description
              << setw(15) << (status == 1 ? "Completed" : (status == 0 ? "Incomplete" : "Reschedule"))
-             << setw(15) << recurrence << endl;
+             << setw(10) << recurrence << endl;
     }
 
     string getTitle(){ return title; }
@@ -64,12 +64,12 @@ public:
         : Reminder(title, description, date, time, recurrence, status) { }
 
     void display() override {
-        cout << left << setw(20) << (title + " (Recurring)")
+        cout << left << setw(25) << (title + " (Recurring)")
              << setw(15) << date
              << setw(15) << time
-             << setw(100) << description
+             << setw(70) << description
              << setw(15) << (status == 1 ? "Completed" : (status == 0 ? "Incomplete" : "Reschedule"))
-             << setw(15) << recurrence << endl;
+             << setw(10) << recurrence << endl;
     }
 };
 
@@ -262,6 +262,14 @@ public:
                 strftime(newDate, sizeof(newDate), "%Y-%m-%d", new_tm);
                 obj.setDate(newDate);
                 cout << "Task rescheduled to: " << newDate << endl;
+                cout << "1. Add Reminder\n";
+                    cout << "2. Modify Reminder\n";
+                    cout << "3. Delete Reminder\n";
+                    cout << "4. View Reminders\n";
+                    cout << "5. Search Reminder\n";
+                    cout << "6. Logout\n";
+                    cout << endl;
+                    cout << "Enter your choice: ";
             }
         }
     }
@@ -369,17 +377,17 @@ public:
             cout << "No reminders found." << endl;
             return;
         }
-        cout << left << setw(20) << "Title" 
+        cout << left << setw(25) << "Title" 
              << setw(15) << "Date" 
              << setw(15) << "Time" 
-             << setw(100) << "Description" 
+             << setw(70) << "Description" 
              << setw(15) << "Status"
-             << setw(15) << "Recurrence" << endl;
-        cout << string(185, '-') << endl;
+             << setw(10) << "Recurrence" << endl;
+        cout << string(160, '-') << endl;
         for (int i = 0; i < reminders.size(); i++) {
             reminders[i]->display();
         }
-        cout << string(185, '-') << endl;
+        cout << string(160, '-') << endl;
     }
 
     int searchReminder() {
@@ -539,14 +547,15 @@ int main(){
                         if(retval != -1){
                             cout << endl;
                             vector<Reminder*>& rems = reminderManager.getReminders();
-                            cout << left << setw(20) << "Title" 
+                            cout << left << setw(25) << "Title" 
                                  << setw(15) << "Date" 
                                  << setw(15) << "Time" 
-                                 << setw(115) << "Description" 
-                                 << setw(15) << "Status" << endl;
-                            cout << string(185, '-') << endl;
+                                 << setw(70) << "Description" 
+                                 << setw(15) << "Status" 
+                                 << setw(10) << "Recurrence" << endl;
+                            cout << string(160, '-') << endl;
                             rems[retval]->display();
-                            cout << string(185, '-') << endl;
+                            cout << string(160, '-') << endl;
                         } else {
                             cout << "Invalid choice! Please try again." << endl;
                         }
